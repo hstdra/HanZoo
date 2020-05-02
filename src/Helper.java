@@ -33,9 +33,9 @@ public class Helper {
 
         while (true) {
             try {
-                String[] values = (SCANNER.nextLine() + " ").split(",");
-
+                String[] values = (SCANNER.nextLine() + " ").split("-");
                 int[] range = new int[2];
+
                 range[0] = values[0].trim().length() == 0 ? 0 : Integer.parseInt(values[0].trim());
                 range[1] = values[1].trim().length() == 0 ? Integer.MAX_VALUE : Integer.parseInt(values[1].trim());
 

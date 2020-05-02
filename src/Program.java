@@ -42,7 +42,7 @@ public class Program {
                 case 8:
                     deleteAnimal();
                     break;
-                default:
+                case 9:
                     zoo.writeToFile();
                     return;
             }
@@ -50,19 +50,16 @@ public class Program {
         }
     }
 
-    public static void sortAnimals() {
-        System.out.println("Sort successfully!");
-        zoo.sortAnimals();
-        viewAnimals(zoo.getAnimals());
+    private static void printAnimalInfo(Animal animal) {
+        System.out.printf("%4s %12s %10s %8s %10s\n", animal.getId(), animal.getClass().getSimpleName(), animal.getName(), animal.getAge(), "$" + animal.getCost());
     }
 
-    public static void filterAnimals() {
-        Class<?> c = Animal.getAnimalClass();
-        String name = Helper.getStringAcceptNull("Input name: ");
-        int[] ageRange = Helper.getRange("Input age range: ");
-        int[] costRange = Helper.getRange("Input cost range: ");
-
-        viewAnimals(zoo.filterAnimals(c, name, ageRange, costRange));
+    private static void viewAnimals(List<Animal> animals) {
+        System.out.println("================================================");
+        System.out.printf("%4s %12s %10s %8s %10s\n", "Id", "Type", "Name", "Age", "Cost");
+        System.out.println("================================================");
+        animals.forEach(Program::printAnimalInfo);
+        System.out.println("================================================");
     }
 
     private static void viewZooInformation() {
@@ -83,25 +80,19 @@ public class Program {
         System.out.println("======================================");
     }
 
-    private static void viewAnAnimal() {
-        String id = Helper.getString("Input id: ");
-        Animal animal = zoo.findAnimalById(id);
-
-        if (animal != null) {
-            printAnimalInfo(animal);
-        }
+    public static void sortAnimals() {
+        System.out.println("Sort successfully!");
+        zoo.sortAnimals();
+        viewAnimals(zoo.getAnimals());
     }
 
-    private static void printAnimalInfo(Animal animal) {
-        System.out.printf("%4s %12s %10s %8s %10s\n", animal.getId(), animal.getClass().getSimpleName(), animal.getName(), animal.getAge(), "$" + animal.getCost());
-    }
+    public static void filterAnimals() {
+        Class<?> c = Animal.getAnimalClass();
+        String name = Helper.getStringAcceptNull("Input name: ");
+        int[] ageRange = Helper.getRange("Input age range: ");
+        int[] costRange = Helper.getRange("Input cost range: ");
 
-    private static void viewAnimals(List<Animal> animals) {
-        System.out.println("================================================");
-        System.out.printf("%4s %12s %10s %8s %10s\n", "Id", "Type", "Name", "Age", "Cost");
-        System.out.println("================================================");
-        animals.forEach(Program::printAnimalInfo);
-        System.out.println("================================================");
+        viewAnimals(zoo.filterAnimals(c, name, ageRange, costRange));
     }
 
     private static void addAnimal() {
@@ -119,6 +110,15 @@ public class Program {
                     zoo.addAnimal(new Fox());
                     return;
             }
+        }
+    }
+
+    private static void viewAnAnimal() {
+        String id = Helper.getString("Input id: ");
+        Animal animal = zoo.findAnimalById(id);
+
+        if (animal != null) {
+            System.out.println(animal);
         }
     }
 
