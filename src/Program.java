@@ -97,18 +97,21 @@ public class Program {
 
     private static void addAnimal() {
         while (true) {
-            switch (Animal.getAnimalClass().getSimpleName()) {
-                case "Lion":
+            switch (Animal.getAnimalClass().getSimpleName().toLowerCase()) {
+                case "lion":
                     zoo.addAnimal(new Lion());
                     return;
 
-                case "Elephant":
+                case "elephant":
                     zoo.addAnimal(new Elephant());
                     return;
 
-                case "Fox":
+                case "fox":
                     zoo.addAnimal(new Fox());
                     return;
+
+                case "animal":
+                    System.out.println("Please specify animal type.");
             }
         }
     }

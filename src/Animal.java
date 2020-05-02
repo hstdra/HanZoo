@@ -58,8 +58,8 @@ public class Animal implements Serializable {
 
     private void initData() {
         name = Helper.getString("Input name: ");
-        age = Helper.getInt("Input age: ");
-        cost = Helper.getInt("Input cost: ");
+        age = Helper.getInt("Input age: ", 0, Integer.MAX_VALUE);
+        cost = Helper.getInt("Input cost: ", 0, Integer.MAX_VALUE);
     }
 
     @Override
